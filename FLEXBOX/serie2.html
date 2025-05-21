@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Miku: Digital Fantasy</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #0a0a20;
+            color: white;
+            margin: 0;
+            padding: 20px;
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(0, 255, 255, 0.05) 0%, transparent 20%),
+                radial-gradient(circle at 90% 80%, rgba(255, 105, 180, 0.05) 0%, transparent 20%);
+        }
+
+        h1 {
+            font-size: 3em;
+            margin: 0;
+            background: linear-gradient(45deg, #39f5fc, #00ffaa, #ff66b2);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 15px rgba(57, 245, 252, 0.3);
+            letter-spacing: 1px;
+        }
+
+        h2 {
+            color: #39f5fc;
+            font-size: 2em;
+            margin-top: 30px;
+            border-bottom: 2px solid #ff66b2;
+            padding-bottom: 10px;
+            text-shadow: 0 0 5px rgba(57, 245, 252, 0.5);
+        }
+
+        footer {
+            background: linear-gradient(90deg, #0a0a20, #1e2a3a);
+            text-align: center;
+            color: #39f5fc;
+            padding: 20px;
+            margin-top: 50px;
+            border-top: 1px solid #39f5fc;
+            box-shadow: 0 -5px 15px rgba(57, 245, 252, 0.1);
+        }
+
+        .info {
+            display: flex;
+            flex-direction: column;
+            justify-content: left;
+            align-items: left;
+            gap: 5px;
+            padding: 10px;
+        }
+
+        .logo {
+            display: flex;
+            justify-content: center;
+            margin: auto;
+            width: 150px;
+            height: 150px;
+            filter: drop-shadow(0 0 10px #39f5fc);
+        }
+
+        .botao-voltar {
+            display: inline-block;
+            background: linear-gradient(45deg, #00c8ff, #9200ff);
+            color: white;
+            padding: 12px 25px;
+            margin: 20px 0;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 15px rgba(0, 200, 255, 0.5);
+            border: 1px solid #39f5fc;
+            text-align: center;
+        }
+
+        .botao-voltar:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 0 25px rgba(146, 0, 255, 0.7);
+            background: linear-gradient(45deg, #9200ff, #00c8ff);
+        }
+
+        .cabecalho {
+            display: flex;
+            align-items: center;
+            gap: 30px;
+            padding: 20px;
+            background: rgba(10, 10, 32, 0.7);
+            border-radius: 15px;
+            margin-bottom: 20px;
+            border: 1px solid #39f5fc;
+            box-shadow: 
+                0 0 15px rgba(57, 245, 252, 0.3),
+                inset 0 0 10px rgba(57, 245, 252, 0.1);
+            backdrop-filter: blur(5px);
+        }
+
+        .preview-container {
+            position: relative;
+            width: 300px;
+            height: 450px;
+            flex-shrink: 0;
+            border: 3px solid #39f5fc;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 
+                0 0 20px #39f5fc,
+                0 0 40px rgba(57, 245, 252, 0.3);
+        }
+
+        .serie-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+
+        .preview-container:hover .serie-img {
+            transform: scale(1.05);
+        }
+
+        .sinopse {
+            font-size: 1.1em;
+            padding: 15px;
+            line-height: 1.6;
+            background: rgba(30, 42, 58, 0.5);
+            border-radius: 10px;
+            border-left: 3px solid #ff66b2;
+            text-shadow: 0 0 5px rgba(57, 245, 252, 0.2);
+        }
+
+        .temporada-label {
+            background: linear-gradient(45deg, #00c8ff, #9200ff);
+            color: white;
+            padding: 12px 20px;
+            cursor: pointer;
+            text-align: center;
+            display: block;
+            border-radius: 25px;
+            margin: 15px 0;
+            width: 200px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 15px rgba(0, 200, 255, 0.5);
+            border: 1px solid #39f5fc;
+        }
+
+        .temporada-label:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 0 25px rgba(146, 0, 255, 0.7);
+            background: linear-gradient(45deg, #9200ff, #00c8ff);
+        }
+
+        .episodios {
+            display: none;
+            width: 100%;
+            transition: all 0.5s ease-in-out;
+            flex-wrap: wrap;
+            gap: 20px;
+            padding: 15px;
+            background: rgba(20, 30, 50, 0.5);
+            border-radius: 15px;
+            margin-bottom: 20px;
+            border: 1px solid #ff66b2;
+            box-shadow: inset 0 0 10px rgba(57, 245, 252, 0.1);
+        }
+
+        #temporada1:checked ~ #episodios1,
+        #temporada2:checked ~ #episodios2 {
+            display: flex;
+        }
+
+        .episodes-container {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            padding: 10px;
+        }
+
+        input[type="checkbox"] {
+            display: none;
+        }
+
+        .episode-card {
+            width: 200px;
+            background: linear-gradient(135deg, #142032, #1e2a3a);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
+            border: 1px solid #39f5fc;
+        }
+
+        .episode-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 
+                0 8px 25px rgba(57, 245, 252, 0.4),
+                0 0 0 2px #ff66b2;
+        }
+
+        .episode-header {
+            background: linear-gradient(90deg, #00c8ff, #9200ff);
+            color: white;
+            padding: 12px;
+            text-align: center;
+            font-weight: bold;
+            font-size: 1.1em;
+            text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+        }
+
+        .episode-content {
+            padding: 15px;
+            background: rgba(57, 245, 252, 0.05);
+        }
+
+        .episode-title {
+            font-size: 1.1em;
+            font-weight: bold;
+            margin-bottom: 5px;
+            color: #39f5fc;
+        }
+
+        .episode-duration {
+            font-size: 0.9em;
+            color: #ff66b2;
+        }
+    </style>
+</head>
+<body>
+
+    <img class="logo" src="imagens/Logo.png" alt="Logo Miku">
+
+    <div class="cabecalho">
+        <div class="preview-container">
+            <img class="serie-img" src="/imagens/Miku.jpg" alt="Miku Digital Fantasy">
+        </div>
+
+        <div class="info">
+            <h1>Uma Miku que não sabia cantar</h1>
+            <p class="sinopse"><strong>
+                Em um mundo onde a música dá vida à magia digital, Hatsune Miku descobre que seu poder vocal pode manipular a própria realidade. Quando uma corrupção de dados ameaça apagar todos os sons do universo digital, ela embarca em uma jornada épica com sua banda virtual para restaurar a harmonia musical antes que o silêncio eterno domine o ciberespaço.
+            </strong></p>
+        </div>
+    </div>
+
+    <h2>Temporadas</h2>
+
+    <div class="episodes-container">
+        <input type="checkbox" id="temporada1">
+        <label for="temporada1" class="temporada-label">Temporada 1</label>
+        <div id="episodios1" class="episodios">
+            <div class="episode-card">
+                <div class="episode-header">EPISÓDIO 1</div>
+                <div class="episode-content">
+                    <div class="episode-title">O Chamado Digital</div>
+                    <div class="episode-duration">42 min</div>
+                </div>
+            </div>
+            
+            <div class="episode-card">
+                <div class="episode-header">EPISÓDIO 2</div>
+                <div class="episode-content">
+                    <div class="episode-title">Corrupção de Dados</div>
+                    <div class="episode-duration">38 min</div>
+                </div>
+            </div>
+            
+            <div class="episode-card">
+                <div class="episode-header">EPISÓDIO 3</div>
+                <div class="episode-content">
+                    <div class="episode-title">A Canção Perdida</div>
+                    <div class="episode-duration">45 min</div>
+                </div>
+            </div>
+
+            <div class="episode-card">
+                <div class="episode-header">EPISÓDIO 4</div>
+                <div class="episode-content">
+                    <div class="episode-title">A Canção dos Espíritos Fungais</div>
+                    <div class="episode-duration">50 min</div>
+                </div>
+            </div>
+
+            <div class="episode-card">
+                <div class="episode-header">EPISÓDIO 5</div>
+                <div class="episode-content">
+                    <div class="episode-title">O Último Show</div>
+                    <div class="episode-duration">40 min</div>
+                </div>
+            </div>
+        </div>
+
+        <input type="checkbox" id="temporada2">
+        <label for="temporada2" class="temporada-label">Temporada 2</label>
+        <div id="episodios2" class="episodios">
+            <div class="episode-card">
+                <div class="episode-header">EPISÓDIO 1</div>
+                <div class="episode-content">
+                    <div class="episode-title">Diva Rebellion</div>
+                    <div class="episode-duration">50 min</div>
+                </div>
+            </div>
+            
+            <div class="episode-card">
+                <div class="episode-header">EPISÓDIO 2</div>
+                <div class="episode-content">
+                    <div class="episode-title">World is Mine</div>
+                    <div class="episode-duration">55 min</div>
+                </div>
+            </div>
+
+            
+        </div>
+    </div>
+
+     
+
+    <a href="flexbox.html" class="botao-voltar">Voltar</a>
+
+    <footer>
+        <p>&copy; 2025 MetFrix. Todos os direitos reservados.</p>
+        <p>Contato: contato@metfrix.com | Redes sociais: @MetFrix</p>
+    </footer>
+
+</body>
+</html>

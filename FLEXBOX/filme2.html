@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kasane Teto</title>
+    <style>
+    
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #000;
+            color: white;
+            margin: 0;
+            padding: 5px;
+        }
+
+        h1 {
+            font-size: 3em;
+            margin: 0;
+            flex-grow: 1;
+            color: crimson
+        }
+
+        button {
+            background-color: black;
+            color: white;
+            width: 100px;
+            height: 100px;
+            border: none;
+            cursor: pointer;
+        }
+
+        footer {
+            background-color: #5c1010;
+            text-align: center;
+            padding: 20px;
+            position: relative;
+            bottom: 0;
+            width: 100%;
+        }
+
+        .info{
+            display: flex;
+            flex-direction: column;
+            justify-content: left;
+            align-items: left;
+            gap: 1px;
+            padding: 1px;
+            flex-grow: 1;
+        }
+       
+        .logo {
+            display: flex;
+            justify-content: center;
+            margin: auto;
+            width: 150px;
+            height: 150px;
+        }
+
+       
+        .cabecalho {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            padding: 5px;
+        }
+      
+        .preview-container {
+            position: relative;
+            width: 800px;
+            height: 800px;
+            flex-shrink: 0;
+        }
+
+        .filme-img{
+            
+            border-radius: 10px;
+        }
+
+        .filme-img, .video-preview {
+            width: 800px;
+            height: 800px;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+        .preview-container:hover .filme-img {
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out;
+        }
+
+        .video-preview {
+            opacity: 0;
+            transition: opacity 0.3s ease-in-out;
+        }
+
+        .preview-container:hover .video-preview {
+            opacity: 1;
+        }
+
+        .sinopse {
+            font-size: 1.3em;
+            padding: 10px;
+        }
+ 
+    </style>
+</head>
+<body>
+
+
+    <img class="logo" src="/imagens/logo.png" alt="Logo">
+
+
+    <div class="cabecalho">
+        <div class="preview-container">
+            <img class="filme-img" src="/imagens/Teto.png" alt="Filme 1">
+            <video class="video-preview" src="/Videos/Teto - Trim.mp4" autoplay muted loop></video>
+        </div>
+
+
+        <div class="info">
+            <h1>Kasane Teto</h1>
+            <p class="sinopse"><strong>
+                Em um mundo onde a música é mais do que apenas som—é magia, emoção e revolução—Kasane Teto, uma jovem determinada e cheia de energia, luta para encontrar seu lugar. Criada como um simples software vocal, ela desafia as expectativas e embarca em uma jornada para provar que sua voz tem alma.
+Quando uma poderosa corporação ameaça silenciar as melodias livres e impor um novo padrão musical sem emoção, Teto se une a um grupo de músicos rebeldes para resgatar o verdadeiro espírito da arte. Com sua voz única e sua determinação inabalável, ela enfrentará desafios inesperados e revelará segredos sobre sua própria existência que mudarão tudo.
+Entre performances eletrizantes, mistérios do passado e a força da amizade, Kasane Teto: A Canção do Destino é uma celebração da música, da identidade e da coragem de ser diferente.
+            </strong></p>
+            <p><strong>Diretor:</strong> Makoto Shinkai</p>
+            <p><strong>Gênero:</strong> Animação, Musical, Aventura, Ficção Científica</p>
+            <p><strong>Classificação:</strong> Livre</p>
+            <p><strong>Duração:</strong> 01h</p>
+
+            <a href="flexbox.html"><button>Voltar</button></a>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2025 MetFrix. Todos os direitos reservados.</p>
+        <p>Contato: contato@metfrix.com | Redes sociais: @MetFrix</p>
+    </footer>
+
+</body>
+</html>

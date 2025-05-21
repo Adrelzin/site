@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Terraria: Reino Fúngico</title>
+    <style>
+        body {
+            font-family: 'Georgia', serif;
+            background-color: #0c0c17;
+            color: #e8e8e0;
+            margin: 0;
+            padding: 20px;
+            background-image: 
+                radial-gradient(circle at 20% 30%, rgba(139, 69, 19, 0.1) 0%, transparent 25%),
+                radial-gradient(circle at 80% 70%, rgba(160, 82, 45, 0.1) 0%, transparent 25%);
+        }
+
+        h1 {
+            font-size: 3em;
+            margin: 0;
+            color: #c0a080; /* Dourado envelhecido */
+            text-shadow: 2px 2px 4px #000, 0 0 10px rgba(192, 160, 128, 0.5);
+            letter-spacing: 1px;
+            font-family: 'Times New Roman', serif;
+        }
+
+        h2 {
+            color: #b8860b; /* Dourado Nárnia */
+            font-size: 2em;
+            margin-top: 30px;
+            border-bottom: 2px solid #8b4513; /* Marrom */
+            padding-bottom: 10px;
+            text-shadow: 1px 1px 2px #000;
+        }
+
+        footer {
+            background: linear-gradient(90deg, #2d1a0f, #5c3a21);
+            text-align: center;
+            color: #d4af37;
+            padding: 20px;
+            margin-top: 50px;
+            border-top: 1px solid #8b4513;
+            font-family: 'Palatino Linotype', serif;
+        }
+
+        .info {
+            display: flex;
+            flex-direction: column;
+            justify-content: left;
+            align-items: left;
+            gap: 5px;
+            padding: 10px;
+        }
+
+        .logo {
+            display: flex;
+            justify-content: center;
+            margin: auto;
+            width: 150px;
+            height: 150px;
+            filter: drop-shadow(0 0 8px rgba(192, 160, 128, 0.7));
+        }
+
+        .cabecalho {
+            display: flex;
+            align-items: center;
+            gap: 30px;
+            padding: 20px;
+            background: rgba(44, 34, 15, 0.7);
+            border-radius: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #8b4513;
+            box-shadow: 0 0 15px rgba(139, 69, 19, 0.5);
+            backdrop-filter: blur(3px);
+        }
+
+        .preview-container {
+            position: relative;
+            width: 300px;
+            height: 450px;
+            flex-shrink: 0;
+            border: 3px solid #b8860b;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 0 20px rgba(184, 134, 11, 0.5);
+        }
+
+        .serie-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+
+        .preview-container:hover .serie-img {
+            transform: scale(1.03);
+        }
+
+        .sinopse {
+            font-size: 1.1em;
+            padding: 15px;
+            line-height: 1.6;
+            background: rgba(44, 34, 15, 0.5);
+            border-radius: 10px;
+            border-left: 3px solid #b8860b;
+            font-style: italic;
+        }
+
+        .temporada-label {
+            background: linear-gradient(45deg, #8b4513, #a0522d);
+            color: #f5deb3;
+            padding: 12px 20px;
+            cursor: pointer;
+            text-align: center;
+            display: block;
+            border-radius: 5px;
+            margin: 15px 0;
+            width: 200px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 8px rgba(139, 69, 19, 0.4);
+            border: 1px solid #d4af37;
+            font-family: 'Palatino Linotype', serif;
+        }
+
+        .temporada-label:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(160, 82, 45, 0.6);
+            background: linear-gradient(45deg, #a0522d, #8b4513);
+        }
+
+        .episodios {
+            display: none;
+            width: 100%;
+            transition: all 0.5s ease-in-out;
+            flex-wrap: wrap;
+            gap: 20px;
+            padding: 15px;
+            background: rgba(60, 45, 20, 0.5);
+            border-radius: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #8b4513;
+            box-shadow: inset 0 0 10px rgba(139, 69, 19, 0.3);
+        }
+
+        #temporada1:checked ~ #episodios1,
+        #temporada2:checked ~ #episodios2 {
+            display: flex;
+        }
+
+        .episodes-container {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            padding: 10px;
+        }
+
+        input[type="checkbox"] {
+            display: none;
+        }
+
+        .episode-card {
+            width: 200px;
+            background: linear-gradient(135deg, #3e2d1a, #2d1a0f);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+            transition: all 0.3s ease;
+            border: 1px solid #b8860b;
+        }
+
+        .episode-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 15px rgba(184, 134, 11, 0.5);
+            border-color: #d4af37;
+        }
+
+        .episode-header {
+            background: linear-gradient(90deg, #8b4513, #a0522d);
+            color: #f5deb3;
+            padding: 12px;
+            text-align: center;
+            font-weight: bold;
+            font-size: 1.1em;
+            text-shadow: 1px 1px 2px #000;
+            font-family: 'Palatino Linotype', serif;
+        }
+
+        .episode-content {
+            padding: 15px;
+            background: rgba(245, 222, 179, 0.05);
+        }
+
+        .episode-title {
+            font-size: 1.1em;
+            font-weight: bold;
+            margin-bottom: 5px;
+            color: #f5deb3;
+        }
+
+        .episode-duration {
+            font-size: 0.9em;
+            color: #b8860b;
+        }
+
+        .botao-voltar {
+            display: inline-block;
+            background: linear-gradient(45deg, #8b4513, #a0522d);
+            color: #f5deb3;
+            padding: 12px 25px;
+            margin: 20px 0;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 8px rgba(139, 69, 19, 0.4);
+            border: 1px solid #d4af37;
+            font-family: 'Palatino Linotype', serif;
+        }
+
+        .botao-voltar:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(160, 82, 45, 0.6);
+            background: linear-gradient(45deg, #a0522d, #8b4513);
+        }
+    </style>
+</head>
+<body>
+
+    <img class="logo" src="/imagens/narnia-logo.png" alt="Nárnia Logo">
+
+    <div class="cabecalho">
+        <div class="preview-container">
+            <img class="serie-img" src="/imagens/narnia-serie.jpg" alt="As Crônicas de Nárnia">
+        </div>
+
+        <div class="info">
+            <h1>As crônicas de Narnia</h1>
+            <p class="sinopse"><strong>
+                Após séculos de paz em Nárnia, um fenômeno estranho começa a apagar partes do mapa do reino. 
+                O Grande Leão Aslam convoca um novo grupo de viajantes para salvar a terra antes que ela desapareça
+                 completamente. Entre eles, a jovem Evelyn descobre que seu próprio passado está ligado ao segredo
+                  de um Reino Esquecido, escondido além das montanhas do norte. Mas algo poderoso mantém esse reino oculto, 
+                  e para libertá-lo, Evelyn e seus companheiros terão que enfrentar 
+                criaturas antigas, magias esquecidas e a sombra de um inimigo que deseja apagar Nárnia da existência.</strong></p>
+        </div>
+    </div>
+
+    <h2>Temporadas</h2>
+
+    <div class="episodes-container">
+        <input type="checkbox" id="temporada1">
+        <label for="temporada1" class="temporada-label">Temporada 1</label>
+        <div id="episodios1" class="episodios">
+            <div class="episode-card">
+                <div class="episode-header">EPISÓDIO 1</div>
+                <div class="episode-content">
+                    <div class="episode-title">A Primeira Ruína</div>
+                    <div class="episode-duration">42 min</div>
+                </div>
+            </div>
+            
+            <div class="episode-card">
+                <div class="episode-header">EPISÓDIO 2</div>
+                <div class="episode-content">
+                    <div class="episode-title">O Chamado de Aslam</div>
+                    <div class="episode-duration">38 min</div>
+                </div>
+            </div>
+            
+            <div class="episode-card">
+                <div class="episode-header">EPISÓDIO 3</div>
+                <div class="episode-content">
+                    <div class="episode-title">Segredos nas Montanhas do Norte</div>
+                    <div class="episode-duration">45 min</div>
+                </div>
+            </div>
+
+                        <div class="episode-card">
+                <div class="episode-header">EPISÓDIO 4</div>
+                <div class="episode-content">
+                    <div class="episode-title">A Magia Perdida</div>
+                    <div class="episode-duration">54 min</div>
+                </div>
+            </div>
+
+                        <div class="episode-card">
+                <div class="episode-header">EPISÓDIO 5</div>
+                <div class="episode-content">
+                    <div class="episode-title">Criaturas das Sombras</div>
+                    <div class="episode-duration">40 min</div>
+                </div>
+            </div>
+        </div>
+
+        <input type="checkbox" id="temporada2">
+        <label for="temporada2" class="temporada-label">Temporada 2</label>
+        <div id="episodios2" class="episodios">
+            <div class="episode-card">
+                <div class="episode-header">EPISÓDIO 1</div>
+                <div class="episode-content">
+                    <div class="episode-title">O Portal Oculto</div>
+                    <div class="episode-duration">50 min</div>
+                </div>
+            </div>
+            
+            <div class="episode-card">
+                <div class="episode-header">EPISÓDIO 2</div>
+                <div class="episode-content">
+                    <div class="episode-title">A Última Esperança</div>
+                    <div class="episode-duration">55 min</div>
+                </div>
+            </div>
+        </div>
+
+                    <div class="episode-card">
+                <div class="episode-header">EPISÓDIO 3</div>
+                <div class="episode-content">
+                    <div class="episode-title">Batalha pelo Reino Esquecido</div>
+                    <div class="episode-duration">45 min</div>
+                </div>
+            </div>
+
+                        <div class="episode-card">
+                <div class="episode-header">EPISÓDIO 4</div>
+                <div class="episode-content">
+                    <div class="episode-title">A Nova Era de Nárnia</div>
+                    <div class="episode-duration">60 min</div>
+                </div>
+            </div>
+    </div>
+
+    <a href="flexbox.html" class="botao-voltar">Voltar</a>
+
+    <footer>
+        <p>&copy; 2025 MetFrix. Todos os direitos reservados.</p>
+        <p>Contato: contato@metfrix.com | Redes sociais: @MetFrix</p>
+    </footer>
+
+</body>
+</html>

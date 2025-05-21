@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DOG - O Devorador de Deuses</title>
+    <style>
+    
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #000;
+            color: white;
+            margin: 0;
+            padding: 5px;
+        }
+
+        h1 {
+            font-size: 3em;
+            margin: 0;
+            flex-grow: 1;
+            color: purple
+        }
+
+        button {
+            background-color: black;
+            color: white;
+            width: 100px;
+            height: 100px;
+            border: none;
+            cursor: pointer;
+        }
+
+        footer {
+            background-color: #5c1010;
+            text-align: center;
+            padding: 20px;
+            position: relative;
+            bottom: 0;
+            width: 100%;
+        }
+
+        .info{
+            display: flex;
+            flex-direction: column;
+            justify-content: left;
+            align-items: left;
+            gap: 1px;
+            padding: 1px;
+            flex-grow: 1;
+        }
+       
+        .logo {
+            display: flex;
+            justify-content: center;
+            margin: auto;
+            width: 150px;
+            height: 150px;
+        }
+
+       
+        .cabecalho {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            padding: 5px;
+        }
+      
+        .preview-container {
+            position: relative;
+            width: 800px;
+            height: 800px;
+            flex-shrink: 0;
+        }
+
+        .filme-img{
+            
+            border-radius: 10px;
+        }
+
+        .filme-img, .video-preview {
+            width: 800px;
+            height: 800px;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+        .preview-container:hover .filme-img {
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out;
+        }
+
+        .video-preview {
+            opacity: 0;
+            transition: opacity 0.3s ease-in-out;
+        }
+
+        .preview-container:hover .video-preview {
+            opacity: 1;
+        }
+
+        .sinopse {
+            font-size: 1.3em;
+            padding: 10px;
+        }
+ 
+    </style>
+</head>
+<body>
+
+
+    <img class="logo" src="/imagens/logo.png" alt="Logo">
+
+
+    <div class="cabecalho">
+        <div class="preview-container">
+            <img class="filme-img" src="/imagens/DOG.jpeg" alt="Filme 1">
+            <video class="video-preview" src="/Videos/TDOG_loop - Trim.mp4" autoplay muted loop></video>
+        </div>
+
+
+        <div class="info">
+            <h1>DOG</h1>
+            <p class="sinopse"><strong>
+                O céu escurece, como se o universo soubesse do horror que está prestes a emergir. O ar fica pesado, e o solo treme sob uma presença indescritível. Então, ele aparece: o Devorador de Deuses, uma entidade colossal que não conhece piedade, um ser criado para consumir divindades e destroçar tudo o que ousa enfrentá-lo.
+Seus olhos cintilam com energia cósmica, refletindo eras de destruição e batalhas épicas. Seu corpo é uma fusão de matéria interdimensional, capaz de se mover mais rápido do que qualquer ser mortal conseguiria reagir. Ele desliza pelo espaço-tempo, abrindo fendas de pura energia enquanto seus inimigos tentam, em vão, escapar.
+Com um rugido que atravessa dimensões, ele parte para o ataque. Seus golpes rasgam a realidade como se fossem simples véus, e cada tentativa de resistência se dissolve diante de seu poder absoluto. Este não é apenas um monstro — é uma força primordial, um predador de entidades superiores.
+A batalha contra ele não é apenas física; é psicológica. A mente de quem ousa enfrentá-lo luta contra o medo avassalador de ser apagado da existência. Mas há esperança: os guerreiros mais fortes, equipados com armas forjadas em energia estelar, podem ter uma chance... mínima, porém real.
+Se o Devorador cair, o mundo verá o nascer de uma nova era. Se ele vencer, restará apenas o vazio.
+            </strong></p>
+            <p><strong>Diretor:</strong> John Doe</p>
+            <p><strong>Gênero:</strong> Ficção científica, Ação, Aventura</p>
+            <p><strong>Classificação:</strong> 18 anos</p>
+            <p><strong>Duração:</strong> 02h30min</p>
+
+            <a href="flexbox.html"><button>Voltar</button></a>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2025 MetFrix. Todos os direitos reservados.</p>
+        <p>Contato: contato@metfrix.com | Redes sociais: @MetFrix</p>
+    </footer>
+
+</body>
+</html>

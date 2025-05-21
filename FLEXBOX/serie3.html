@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Terraria: Reino Fúngico</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #1a0a1a; /* Fundo roxo escuro */
+            color: #f8f8f8;
+            margin: 0;
+            padding: 20px;
+        }
+
+        h1 {
+            font-size: 3em;
+            margin: 0;
+            background: linear-gradient(45deg, #ff69b4, #c71585, #9370db);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 10px rgba(199, 21, 133, 0.3);
+        }
+
+        h2 {
+            color: #daa520; /* Dourado */
+            font-size: 2em;
+            margin-top: 30px;
+            border-bottom: 2px solid #9370db; /* Roxo claro */
+            padding-bottom: 10px;
+        }
+
+        footer {
+            background: linear-gradient(90deg, #6a0dad, #ff69b4); /* Roxo para rosa */
+            text-align: center;
+            color: white;
+            padding: 20px;
+            margin-top: 50px;
+            border-top: 1px solid #daa520; /* Dourado */
+        }
+
+        .info {
+            display: flex;
+            flex-direction: column;
+            justify-content: left;
+            align-items: left;
+            gap: 5px;
+            padding: 10px;
+        }
+
+        .logo {
+            display: flex;
+            justify-content: center;
+            margin: auto;
+            width: 150px;
+            height: 150px;
+            filter: drop-shadow(0 0 10px #ff69b4);
+        }
+
+        .cabecalho {
+            display: flex;
+            align-items: center;
+            gap: 30px;
+            padding: 20px;
+            background: linear-gradient(90deg, #2e0d2e, #4b1a4b); /* Degradê roxo */
+            border-radius: 15px;
+            margin-bottom: 20px;
+            border: 1px solid #daa520; /* Dourado */
+            box-shadow: 0 0 20px rgba(218, 165, 32, 0.2);
+        }
+
+        .botao-voltar {
+            display: inline-block;
+            background: linear-gradient(45deg, #2e0d2e, #4b1a4b);
+            color: white;
+            padding: 12px 25px;
+            margin: 20px 0;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 15px ff69b4(0, 200, 255, 0.5);
+            border: 1px solid #daa520;
+            text-align: center;
+        }
+
+        .botao-voltar:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 0 25px rgba(146, 0, 255, 0.7);
+            background: linear-gradient(45deg, #ff69b4, #9370db);
+        }
+
+        .preview-container {
+            position: relative;
+            width: 300px;
+            height: 450px;
+            flex-shrink: 0;
+            border: 3px solid #daa520; 
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 
+                0 0 10px #ff69b4,
+                0 0 20px #9370db;
+        }
+
+        .serie-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+
+        .preview-container:hover .serie-img {
+            transform: scale(1.05);
+        }
+
+        .sinopse {
+            font-size: 1.1em;
+            padding: 15px;
+            line-height: 1.6;
+            background-color: rgba(75, 26, 75, 0.7); 
+            border-radius: 10px;
+            border-left: 3px solid #ff69b4;
+        }
+
+        .temporada-label {
+            background: linear-gradient(45deg, #c71585, #6a0dad); 
+            color: white;
+            padding: 12px 20px;
+            cursor: pointer;
+            text-align: center;
+            display: block;
+            border-radius: 25px;
+            margin: 15px 0;
+            width: 200px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(199, 21, 133, 0.4);
+            border: 1px solid #ffb6c1;
+        }
+
+        .temporada-label:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(199, 21, 133, 0.6);
+            background: linear-gradient(45deg, #ff69b4, #9370db);
+        }
+
+        .episodios {
+            display: none;
+            width: 100%;
+            transition: all 0.5s ease-in-out;
+            flex-wrap: wrap;
+            gap: 20px;
+            padding: 15px;
+            background-color: rgba(46, 13, 46, 0.7); /* Roxo mais escuro */
+            border-radius: 15px;
+            margin-bottom: 20px;
+            border: 1px solid #daa520;
+        }
+
+        #temporada1:checked ~ #episodios1,
+        #temporada2:checked ~ #episodios2 {
+            display: flex;
+        }
+
+        .episodes-container {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            padding: 10px;
+        }
+
+        input[type="checkbox"] {
+            display: none;
+        }
+
+        .episode-card {
+            width: 200px;
+            background: linear-gradient(135deg, #3d1a3d, #2e0d2e);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
+            border: 1px solid #ff69b4;
+        }
+
+        .episode-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 
+                0 8px 20px rgba(255, 105, 180, 0.4),
+                0 0 0 2px #daa520;
+        }
+
+        .episode-header {
+            background: linear-gradient(90deg, #c71585, #6a0dad);
+            color: white;
+            padding: 12px;
+            text-align: center;
+            font-weight: bold;
+            font-size: 1.1em;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+        }
+
+        .episode-content {
+            padding: 15px;
+            background-color: rgba(255, 182, 193, 0.1);
+        }
+
+        .episode-title {
+            font-size: 1.1em;
+            font-weight: bold;
+            margin-bottom: 5px;
+            color: #ffb6c1; /* Rosa claro */
+        }
+
+        .episode-duration {
+            font-size: 0.9em;
+            color: #daa520; /* Dourado */
+        }
+    </style>
+</head>
+<body>
+
+    <img class="logo" src="/imagens/logo.png" alt="Logo">
+
+    <div class="cabecalho">
+        <div class="preview-container">
+            <img class="serie-img" src="/imagens/EAH.jpeg" alt="Terraria Série">
+        </div>
+
+        <div class="info">
+            <h1>Ever after High</h1>
+            <p class="sinopse"><strong>
+                O Livro dos Destinos foi roubado! Em Ever After High, onde cada aluno deve seguir sua história, 
+                o equilíbrio está ameaçado. Raven Queen e Apple White formam uma aliança inesperada para desvendar
+                 o mistério e recuperar o livro antes que os contos de fadas desapareçam para sempre. 
+                 Mas à medida que exploram os recantos ocultos da escola, ~
+                descobrem um segredo ainda maior: e se o destino fosse apenas uma ilusão? </strong></p>
+        </div>
+    </div>
+
+    <h2>Temporadas</h2>
+
+    <div class="episodes-container">
+        <input type="checkbox" id="temporada1" >
+        <label for="temporada1" class="temporada-label">Temporada 1</label>
+        <div id="episodios1" class="episodios">
+            <div class="episode-card">
+                <div class="episode-header">EPISÓDIO 1</div>
+                <div class="episode-content">
+                    <div class="episode-title">O Livro Perdido</div>
+                    <div class="episode-duration">42 min</div>
+                </div>
+            </div>
+            
+            <div class="episode-card">
+                <div class="episode-header">EPISÓDIO 2</div>
+                <div class="episode-content">
+                    <div class="episode-title">Marcas no Espelho Mágico</div>
+                    <div class="episode-duration">38 min</div>
+                </div>
+            </div>
+            
+            <div class="episode-card">
+                <div class="episode-header">EPISÓDIO 3</div>
+                <div class="episode-content">
+                    <div class="episode-title">Caminhos Esquecidos</div>
+                    <div class="episode-duration">45 min</div>
+                </div>
+            </div>
+
+            <div class="episode-card">
+                <div class="episode-header">EPISÓDIO 4</div>
+                <div class="episode-content">
+                    <div class="episode-title">O Chamado da Rainha Sombria</div>
+                    <div class="episode-duration">50 min</div>
+                </div>
+            </div>
+
+            <div class="episode-card">
+                <div class="episode-header">EPISÓDIO 5</div>
+                <div class="episode-content">
+                    <div class="episode-title">O Enigma do Feitiço</div>
+                    <div class="episode-duration">55 min</div>
+                </div>
+            </div>
+        </div>
+
+        <input type="checkbox" id="temporada2">
+        <label for="temporada2" class="temporada-label">Temporada 2</label>
+        <div id="episodios2" class="episodios">
+            <div class="episode-card">
+                <div class="episode-header">EPISÓDIO 1</div>
+                <div class="episode-content">
+                    <div class="episode-title">Entre Luz e Trevas</div>
+                    <div class="episode-duration">50 min</div>
+                </div>
+            </div>
+            
+            <div class="episode-card">
+                <div class="episode-header">EPISÓDIO 2</div>
+                <div class="episode-content">
+                    <div class="episode-title">A Verdade Escondida</div>
+                    <div class="episode-duration">55 min</div>
+                </div>
+            </div>
+
+            <div class="episode-card">
+                <div class="episode-header">EPISÓDIO 4</div>
+                <div class="episode-content">
+                    <div class="episode-title">O Último Capítulo</div>
+                    <div class="episode-duration">30 min</div>
+                </div>
+            </div>
+
+            <div class="episode-card">
+                <div class="episode-header">EPISÓDIO 5</div>
+                <div class="episode-content">
+                    <div class="episode-title">Reescrevendo o Destino</div>
+                    <div class="episode-duration">42 min</div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <a href="flexbox.html" class="botao-voltar">Voltar</a>
+
+    <footer>
+        <p>&copy; 2025 MetFrix. Todos os direitos reservados.</p>
+        <p>Contato: contato@metfrix.com | Redes sociais: @MetFrix</p>
+    </footer>
+
+</body>
+</html>

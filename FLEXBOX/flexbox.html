@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Metfrix</title>
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+                background-color: #000000;
+                justify-content: center;
+                color: rgb(255, 255, 255);
+                margin: 0;
+                padding: 5px;
+            }
+
+            a {
+                text-decoration: none;
+                color: white;
+            }
+
+            .cabecalho {
+                display: flex;
+                justify-content: right;
+                align-items: center;
+                position: relative; 
+                width: 100%;
+                padding: 1px;
+            }
+
+            footer {
+                background-color: #5c1010;
+                text-align: center;
+                padding: 20px;
+                position: relative;
+                bottom: 0;
+                width: 100%;
+            }
+
+
+            main {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+            }
+
+            .logo {
+                display: flex;
+                justify-content: center; 
+                margin: auto;
+                width: 150px;
+                height: 150px;
+            }
+
+            .foto-usuario{
+                width: 100px;
+                height: 100px;
+                border-radius: 50%;
+                right: 20px;
+            }
+
+            .conteudo h2 {
+                margin-top: 20px;
+            }
+
+            .grid {
+                display: flex;
+                gap: 20px;
+                flex-wrap: wrap;
+            }
+
+            .seta {
+                display: flex;
+                justify-content: center;
+                margin-top: 20px;
+                width: 150px;
+                height: 150px;
+            }
+
+            .item {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .item img {
+                width: 150px;
+                height: 150px;
+                border-radius: 10px;
+            }
+
+            .filme:hover {
+                transform: scale(1.1);
+                transition: 0.3s;
+            }
+
+            .serie:hover {
+                transform: rotate(5deg);
+                transition: 0.3s;
+            }
+
+            .seta:hover {
+                transform: rotate(360deg);
+                transition: 0.3s;
+            }
+        </style>
+</head>
+    <body>
+            <img class="logo" src="/imagens/logo.png" alt="Logo do Metfrix">
+            <div class="cabecalho">
+                <span>Olá, Adryell White</span>
+                <img class="foto-usuario" src="/imagens/white.jpeg" alt="Foto do Usuário">
+            </div>
+
+
+        <main class="conteudo">
+            <h2>Filmes</h2>
+            <div class="grid filmes">
+
+                <a href = "filme1.html">
+                    <div class="item filme">
+                        <img src="/imagens/DOG.jpeg" alt="Filme 1">
+                        <p>DOG</p>
+                    </div>
+                </a>
+
+                <a href = "filme2.html">
+                    <div class="item filme">
+                        <img src="/imagens/Teto.png" alt="Filme 2">
+                        <p>Kasane Teto</p>
+                    </div>
+                </a>
+
+                <a href = "filme3.html">
+                    <div class="item filme">
+                        <img src="/imagens/download.jpeg" alt="Filme 3">
+                        <p>Galactia</p>
+                    </div>
+                </a>
+
+                <a href = "filme4.html">
+                    <div class="item filme">
+                        <img src="/imagens/image.png" alt="Filme 4">
+                        <p>Kurt Cobe!?</p>
+                    </div>
+                </a>
+
+                <a href = "filme5.html">
+                <div class="item filme">
+                    <img src="/imagens/House.jpg" alt="Filme 5">
+                    <p>O House</p>
+                </div>
+                </a>
+
+                <a href = "filme6.html">
+                <div class="item filme">
+                    <img src="/imagens/Undertale.jpg" alt="Filme 6">
+                    <p>Undertale</p>
+                </div>
+                </a>
+
+                <!--<div>
+                    <a class = "seta" href = "flexbox2.html"><img src="/imagens/seta.png" alt="Seta" title = "Ver mais"></a>
+                </div> -->
+            </div>
+            
+
+
+            <h2>Séries</h2>
+            <div class="grid series">
+
+                <a href = "serie1.html">
+                    <div class="item serie">
+                        <img src="/imagens/Mush.jpg" alt="Série 1">
+                        <p>Mush city</p>
+                    </div>
+                </a>
+
+                <a href = "serie2.html">
+                    <div class="item serie">
+                        <img src="/imagens/Miku.jpg" alt="Série 2">
+                        <p>Uma Miku que não sabia cantar</p>
+                    </div>
+                </a>
+
+                <a href = "serie3.html">
+                    <div class="item serie">
+                        <img src="/imagens/EAH.jpeg" alt="Série 3">
+                        <p>Ever After High</p>
+                    </div>
+                </a>
+
+                <a href = "serie4.html">
+                    <div class="item serie">
+                        <img src="/imagens/H20.jpg" alt="Série 4">
+                        <p>H2O: Meninas sereias</p>
+                    </div>
+                </a>
+
+                <a href = "serie5.html">
+                    <div class="item serie">
+                        <img src="/imagens/winx.jpg" alt="Série 5">
+                        <p>Winx</p>
+                    </div>
+                </a>
+
+                <a href = "serie6.html">
+                    <div class="item serie">
+                        <img src="/imagens/Narnia.jpg" alt="Série 6">
+                        <p>As crônicas de Narnia</p>
+                    </div>
+                </a>
+
+                 <!--<div>
+                    <a class = "seta" href = "flexbox2.html"><img src="/imagens/seta.png" alt="Seta" title = "Ver mais"></a>
+                </div> -->
+            </div>
+        </main>
+
+        <footer>
+        <p>&copy; 2025 MetFrix. Todos os direitos reservados.</p>
+        <p>Contato: contato@metfrix.com | Redes sociais: @MetFrix</p>
+    </footer>
+
+    </body>
+</html>

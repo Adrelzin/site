@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Terraria: Reino Fúngico</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #0a2e38; /* Azul marinho */
+            color: #e0f7fa;
+            margin: 0;
+            padding: 20px;
+        }
+
+        h1 {
+            font-size: 3em;
+            margin: 0;
+            color: #48cae4; /* Azul claro */
+            text-shadow: 0 0 10px rgba(72, 202, 228, 0.5);
+        }
+
+        h2 {
+            color: #90e0ef; /* Azul gelo */
+            font-size: 2em;
+            margin-top: 30px;
+            border-bottom: 2px solid #00b4d8;
+            padding-bottom: 10px;
+        }
+
+        footer {
+            background: linear-gradient(90deg, #0077b6, #0096c7);
+            text-align: center;
+            color: white;
+            padding: 20px;
+            margin-top: 50px;
+            border-top: 1px solid #90e0ef;
+        }
+
+        .info {
+            display: flex;
+            flex-direction: column;
+            justify-content: left;
+            align-items: left;
+            gap: 5px;
+            padding: 10px;
+        }
+
+        .logo {
+            display: flex;
+            justify-content: center;
+            margin: auto;
+            width: 150px;
+            height: 150px;
+            filter: drop-shadow(0 0 10px #00b4d8);
+        }
+
+        .cabecalho {
+            display: flex;
+            align-items: center;
+            gap: 30px;
+            padding: 20px;
+            background: linear-gradient(90deg, #03045e, #0077b6);
+            border-radius: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #90e0ef;
+        }
+
+        .preview-container {
+            position: relative;
+            width: 300px;
+            height: 450px;
+            flex-shrink: 0;
+            border: 3px solid #48cae4;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 0 15px rgba(0, 180, 216, 0.5);
+        }
+
+        .serie-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .sinopse {
+            font-size: 1.1em;
+            padding: 10px;
+            line-height: 1.6;
+            background-color: rgba(0, 119, 182, 0.5);
+            border-radius: 10px;
+            border-left: 3px solid #48cae4;
+        }
+
+        .temporada-label {
+            background: linear-gradient(90deg, #0096c7, #00b4d8);
+            color: white;
+            padding: 12px 20px;
+            cursor: pointer;
+            text-align: center;
+            display: block;
+            border-radius: 5px;
+            margin: 15px 0;
+            width: 200px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0, 180, 216, 0.3);
+            border: 1px solid #caf0f8;
+        }
+
+        .temporada-label:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 8px rgba(0, 150, 199, 0.5);
+        }
+
+        .episodios {
+            display: none;
+            width: 100%;
+            transition: all 0.5s ease-in-out;
+            flex-wrap: wrap;
+            gap: 20px;
+            padding: 15px;
+            background-color: rgba(0, 150, 199, 0.3);
+            border-radius: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #90e0ef;
+        }
+
+        #temporada1:checked ~ #episodios1 {
+            display: flex;
+        }
+
+        .episodes-container {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            padding: 10px;
+        }
+
+        input[type="checkbox"] {
+            display: none;
+        }
+
+        .episode-card {
+            width: 200px;
+            background-color: #0077b6;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+            border: 1px solid #48cae4;
+        }
+
+        .episode-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 15px rgba(0, 180, 216, 0.4);
+        }
+
+        .episode-header {
+            background-color: #0096c7;
+            color: white;
+            padding: 10px;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        .episode-content {
+            padding: 15px;
+            background-color: rgba(202, 240, 248, 0.1);
+        }
+
+        .episode-title {
+            font-size: 1.1em;
+            font-weight: bold;
+            margin-bottom: 5px;
+            color: #caf0f8;
+        }
+
+        .episode-duration {
+            font-size: 0.9em;
+            color: #90e0ef;
+        }
+
+        .botao-voltar {
+            display: inline-block;
+            background: linear-gradient(90deg, #0077b6, #00b4d8);
+            color: white;
+            padding: 12px 25px;
+            margin: 20px 0;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0, 180, 216, 0.3);
+            border: 1px solid #90e0ef;
+        }
+
+        .botao-voltar:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 8px rgba(0, 150, 199, 0.5);
+        }
+    </style>
+</head>
+<body>
+
+    <img class="logo" src="/imagens/logo.png" alt="Logo">
+
+    <div class="cabecalho">
+        <div class="preview-container">
+            <img class="serie-img" src="/imagens/H20.jpg" alt="Terraria Série">
+        </div>
+
+        <div class="info">
+            <h1>H2O Meninas Sereias</h1>
+            <p class="sinopse"><strong>
+                Na tranquila cidade litorânea de Crystal Bay, três melhores amigas—Luna, 
+                Marina e Cora—descobrem um segredo antigo na misteriosa Caverna da Lua. 
+                Após um encontro mágico com as águas encantadas, elas se transformam em sereias sempre que
+                entram em contato com a água! Mas essa não é a única surpresa: cada uma ganha poderes incríveis
+                ligados ao oceano. Enquanto tentam equilibrar a vida normal e o mundo submarino, descobrem que 
+                um grupo secreto busca roubar a magia das marés para controlar os oceanos. Com muita amizade, 
+                confusão e momentos hilários, elas precisam proteger seus poderes e a própria essência do mar!</strong></p>
+        </div>
+    </div>
+
+    <h2>Temporadas</h2>
+
+    <div class="episodes-container">
+        <input type="checkbox" id="temporada1">
+        <label for="temporada1" class="temporada-label">Temporada 1</label>
+        <div id="episodios1" class="episodios">
+            <div class="episode-card">
+                <div class="episode-header">EPISÓDIO 1</div>
+                <div class="episode-content">
+                    <div class="episode-title">O Chamado das Ondas</div>
+                    <div class="episode-duration">22 min</div>
+                </div>
+            </div>
+            
+            <div class="episode-card">
+                <div class="episode-header">EPISÓDIO 2</div>
+                <div class="episode-content">
+                    <div class="episode-title">A Profundezas Brilhantes</div>
+                    <div class="episode-duration">28 min</div>
+                </div>
+            </div>
+            
+            <div class="episode-card">
+                <div class="episode-header">EPISÓDIO 3</div>
+                <div class="episode-content">
+                    <div class="episode-title">A Magia do Oceano</div>
+                    <div class="episode-duration">23 min</div>
+                </div>
+            </div>
+
+            <div class="episode-card">
+                <div class="episode-header">EPISÓDIO 4</div>
+                <div class="episode-content">
+                    <div class="episode-title">O Cristal da Lua</div>
+                    <div class="episode-duration">25 min</div>
+                </div>
+            </div>
+
+            <div class="episode-card">
+                <div class="episode-header">EPISÓDIO 5</div>
+                <div class="episode-content">
+                    <div class="episode-title">A Última Maré</div>
+                    <div class="episode-duration">24 min</div>
+                </div>
+            </div>
+
+            <div class="episode-card">
+                <div class="episode-header">EPISÓDIO 6</div>
+                <div class="episode-content">
+                    <div class="episode-title">Crystal Bay para Sempre</div>
+                    <div class="episode-duration">28 min</div>
+                </div>
+            </div>
+        </div>
+
+    <a href="flexbox.html" class="botao-voltar">Voltar</a>
+
+    <footer>
+        <p>&copy; 2025 MetFrix. Todos os direitos reservados.</p>
+        <p>Contato: contato@metfrix.com | Redes sociais: @MetFrix</p>
+    </footer>
+
+</body>
+</html>
